@@ -2,6 +2,7 @@
   "expo": {
     "name": "ContributionXmasTree",
     "slug": "ContributionXmasTree",
+    "slug": "luckypear-tree",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,8 +24,10 @@
       "package": "io.luckypear.ContributionXmasTree"
     },
     "web": {
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "plugins": ["expo-router"]
   }
 }

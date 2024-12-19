@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { Main } from "./src/Main";
+import { Main } from "./src/MainPage";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);

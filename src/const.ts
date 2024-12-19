@@ -1,5 +1,13 @@
+import { Dimensions, Platform } from "react-native";
+
 export const gridWidth = 40;
 export const gridHeight = 60;
+
+export const screenWidth = Platform.select({
+  web: Math.min(540, Dimensions.get("window").width),
+  native: Dimensions.get("window").width,
+});
+export const pixelSize = Math.floor(screenWidth / gridWidth);
 
 export const colorMap = {
   "-1": "#25305d", // night
@@ -11,7 +19,7 @@ export const colorMap = {
   5: "#795548", // brown (trunk)
 };
 
-export const decorationColors = ["#E53935", "#2979FF", "#F5F5F5"];
+export const decorationColors = ["#E53935", "#2979FF"];
 export const starColor = "#FFD700";
 
 export const treeBreakpoints = [
