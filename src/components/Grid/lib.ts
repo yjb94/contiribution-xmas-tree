@@ -1,3 +1,4 @@
+import { Contribution } from "../../api/fetchGithubContribution";
 import {
   decorationColors,
   gridHeight,
@@ -7,7 +8,7 @@ import {
 } from "../../const";
 
 export const createEmptyGrid = () => {
-  return Array.from({ length: gridHeight }, () => Array(gridWidth).fill(null));
+  return Array.from({ length: gridHeight }, () => Array(gridWidth).fill(-1));
 };
 
 const calculateBaseTreeSize = (contributionCount: number) => {
@@ -47,20 +48,29 @@ const calculateBaseTreeSize = (contributionCount: number) => {
   return { baseWidth, trunkWidth, treeHeight };
 };
 
-export const generateContributionTree = (contributions: number[]) => {
+export const generateContributionTree = (contributions: Contribution[]) => {
   const grid: number[][] = Array.from({ length: gridHeight }, () =>
     Array(gridWidth).fill(-1)
   );
 
-  const activeContributions = contributions.filter((count) => count > 0);
+  const activeContributions = contributions.filter(
+    (contribution) => contribution.count > 0
+  );
   if (activeContributions.length === 0)
-    return { grid, remainingContributions: 0, baseWidth: 0, trunkWidth: 0 };
+    return {
+      grid,
+      remainingContributions: 0,
+      baseWidth: 0,
+      trunkWidth: 0,
+      contributionCount: 0,
+    };
 
-  const normalizedContributions = activeContributions.map((count) => {
-    if (count <= 3) return 1;
-    if (count <= 6) return 2;
-    if (count <= 9) return 3;
-    return 4;
+  const normalizedContributions = activeContributions.map((contribution) => {
+    if (contribution.level === "FIRST_QUARTILE") return 1;
+    if (contribution.level === "SECOND_QUARTILE") return 2;
+    if (contribution.level === "THIRD_QUARTILE") return 3;
+    if (contribution.level === "FOURTH_QUARTILE") return 4;
+    return -1;
   });
 
   const centerX = Math.floor(gridWidth / 2);
@@ -138,7 +148,13 @@ export const generateContributionTree = (contributions: number[]) => {
     }
   }
 
-  return { grid, remainingContributions, baseWidth, trunkWidth };
+  return {
+    grid,
+    remainingContributions,
+    baseWidth,
+    trunkWidth,
+    contributionCount: activeContributions.length,
+  };
 };
 
 const generateStar = (
@@ -229,9 +245,7 @@ const generateStar = (
 export const generateDecorations = (
   treeGrid: number[][],
   count: number,
-  contributionCount: number,
-  baseWidth: number,
-  trunkWidth: number
+  contributionCount: number
 ) => {
   const decorationGrid = createEmptyGrid();
   const availableSpots: [number, number][] = [];
@@ -254,7 +268,7 @@ export const generateDecorations = (
     const randomIndex = Math.floor(Math.random() * availableSpots.length);
     const [y, x] = availableSpots.splice(randomIndex, 1)[0];
 
-    if (!decoratedGrid[y][x]) {
+    if (decoratedGrid[y][x] == "-1") {
       const decorationColor = decorationColors[i % decorationColors.length];
       decoratedGrid[y][x] = decorationColor;
     }

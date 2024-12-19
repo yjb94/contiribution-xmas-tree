@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { getContributions } from "./api/fetchGithubContribution";
+import { fetchGithubContributions } from "./api/fetchGithubContribution";
 import Button from "./components/Button";
 import { generateContributionTree } from "./components/Grid/lib";
 import { contributionState } from "./store/contribution";
@@ -15,16 +15,20 @@ const MainPage = () => {
     if (!userName) return;
     setIsLoading(true);
 
-    const contributions = await getContributions(userName);
-    contributionState.contributions = contributions.reduce(
-      (acc, cur) => acc + cur.count,
-      0
-    );
-    contributionState.contributionTreeData =
-      generateContributionTree(contributions);
-
-    setIsLoading(false);
-    router.push("tree");
+    try {
+      const contributions = await fetchGithubContributions(userName);
+      contributionState.contributions = contributions.reduce(
+        (acc, cur) => acc + cur.count,
+        0
+      );
+      contributionState.contributionTreeData =
+        generateContributionTree(contributions);
+      router.push("tree");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

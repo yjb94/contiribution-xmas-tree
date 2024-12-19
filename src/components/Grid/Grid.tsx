@@ -18,7 +18,6 @@ const Grid: React.FC<GridProps> = ({ contributionTreeData }) => {
   const [decorationGrid, setDecorationGrid] = useState<(string | null)[][]>(
     createEmptyGrid()
   );
-  const [isSnowing, setIsSnowing] = useState(false);
   const [snowflakes, setSnowflakes] = useState<SnowflakeProps[]>();
 
   useEffect(() => {
@@ -98,23 +97,6 @@ const Grid: React.FC<GridProps> = ({ contributionTreeData }) => {
 
         {!!snowflakes && <SnowCanvas snowflakes={snowflakes} />}
       </View>
-      {step === 1 && (
-        <TouchableOpacity style={styles.button} onPress={handleDecorate}>
-          <Text style={styles.buttonText}>
-            트리 꾸미기 ({contributionTreeData.remainingContributions}개)
-          </Text>
-        </TouchableOpacity>
-      )}
-      {step === 2 && !isSnowing && (
-        <TouchableOpacity style={styles.button} onPress={startSnowing}>
-          <Text style={styles.buttonText}>눈 내리기 시작</Text>
-        </TouchableOpacity>
-      )}
-      {step === 2 && isSnowing && (
-        <TouchableOpacity style={styles.button} onPress={toStepOne}>
-          <Text style={styles.buttonText}>돌아가기</Text>
-        </TouchableOpacity>
-      )}
     </View>
   );
 };

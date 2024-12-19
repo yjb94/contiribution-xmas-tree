@@ -6,8 +6,7 @@ import StatsView from "./components/Stats/StatsView";
 import { contributionState } from "./store/contribution";
 
 const TreePage = () => {
-  const { contributionTreeData, contributions } =
-    useSnapshot(contributionState);
+  const { contributionTreeData } = useSnapshot(contributionState);
 
   const [showStatistics, setShowStatistics] = useState(false);
 
