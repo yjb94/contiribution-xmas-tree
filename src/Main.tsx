@@ -1,9 +1,10 @@
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView } from "react-native";
+import Tree from "./components/Tree/Tree";
 
 const Main = () => {
   return (
     <SafeAreaView>
-      <Text>Hello world</Text>
+      <Tree />
     </SafeAreaView>
   );
 };
