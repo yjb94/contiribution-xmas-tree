@@ -1,20 +1,23 @@
 import { Stack } from "expo-router";
+import { App } from "../App";
 
 const RootLayout = () => {
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="index" />
-      <Stack.Screen
-        name="tree"
-        options={{
-          animation: "fade",
+    <App>
+      <Stack
+        screenOptions={{
+          headerShown: false,
         }}
-      />
-    </Stack>
+      >
+        <Stack.Screen name="index" />
+        <Stack.Screen
+          name="tree"
+          options={{
+            animation: "fade",
+          }}
+        />
+      </Stack>
+    </App>
   );
 };
 

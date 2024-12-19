@@ -1,7 +1,6 @@
-import { vec } from "@shopify/react-native-skia";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { colorMap, gridHeight, gridWidth, pixelSize } from "../../const";
+import { colorMap, pixelSize } from "../../const";
 import { SnowCanvas } from "../Snow/SnowCanvas";
 import { SnowflakeProps } from "../Snow/Snowflake";
 import {
@@ -44,18 +43,19 @@ const Grid: React.FC<GridProps> = ({ contributionTreeData }) => {
   };
 
   const startSnowing = () => {
-    setSnowflakes(
-      Array.from(
-        { length: 365 - contributionTreeData.contributionCount },
-        (_, i) => ({
-          id: i,
-          initialPosition: vec(
-            Math.random() * gridWidth * pixelSize,
-            -20 - Math.random() * gridHeight * pixelSize * 0.5
-          ),
-        })
-      )
-    );
+    // setSnowflakes(
+    //   Array.from(
+    //     { length: 365 - contributionTreeData.contributionCount },
+    //     (_, i) => ({
+    //       id: i,
+    //       initialPosition: vec(
+    //         Math.random() * gridWidth * pixelSize,
+    //         -20 - Math.random() * gridHeight * pixelSize * 0.5
+    //       ),
+    //     })
+    //   )
+    // );
+    setIsSnowing(true);
   };
 
   return (
@@ -96,7 +96,9 @@ const Grid: React.FC<GridProps> = ({ contributionTreeData }) => {
           ))}
         </View>
 
-        {!!snowflakes && <SnowCanvas snowflakes={snowflakes} />}
+        {isSnowing && (
+          <SnowCanvas count={365 - contributionTreeData.contributionCount} />
+        )}
       </View>
       {step === 1 && (
         <TouchableOpacity style={styles.button} onPress={handleDecorate}>

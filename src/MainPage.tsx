@@ -37,6 +37,7 @@ const MainPage = () => {
           onChangeText={setUserName}
           autoCapitalize="none"
           autoCorrect={false}
+          onSubmitEditing={fetchContributions}
         />
         <Button
           isLoading={isLoading}

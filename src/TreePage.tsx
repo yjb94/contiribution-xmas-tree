@@ -1,10 +1,8 @@
-import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
-import Animated, { FadeIn } from "react-native-reanimated";
+import { ScrollView, StyleSheet } from "react-native";
 import { useSnapshot } from "valtio";
-import Button from "./components/Button";
 import Grid from "./components/Grid/Grid";
+import StatsView from "./components/Stats/StatsView";
 import { contributionState } from "./store/contribution";
 
 const TreePage = () => {
@@ -26,47 +24,7 @@ const TreePage = () => {
       contentContainerStyle={styles.contentContainer}
     >
       <Grid contributionTreeData={contributionTreeData} />
-      {showStatistics && (
-        <View style={styles.statisticsContainer}>
-          <Animated.Text
-            style={styles.statisticsText}
-            entering={FadeIn.duration(1000)}
-          >
-            Total Contributions: {contributions}
-          </Animated.Text>
-
-          <Animated.Text
-            style={styles.statisticsText}
-            entering={FadeIn.duration(1000).delay(1000)}
-          >
-            Green days: {contributionTreeData.contributionCount}
-          </Animated.Text>
-
-          <Animated.Text
-            style={styles.statisticsText}
-            entering={FadeIn.duration(1000).delay(2000)}
-          >
-            Snowy days: {365 - contributionTreeData.contributionCount}
-          </Animated.Text>
-
-          <Animated.Text
-            style={styles.statisticsText}
-            entering={FadeIn.duration(1000).delay(3000)}
-          >
-            Merry Chistmas!
-          </Animated.Text>
-
-          <Animated.View entering={FadeIn.duration(1000).delay(4000)}>
-            <Button
-              style={styles.button}
-              title="Go back"
-              onPress={() => {
-                router.back();
-              }}
-            />
-          </Animated.View>
-        </View>
-      )}
+      {showStatistics && <StatsView />}
     </ScrollView>
   );
 };

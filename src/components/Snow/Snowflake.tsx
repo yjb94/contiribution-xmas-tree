@@ -4,14 +4,19 @@ import {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
-import { colorMap, gridHeight, pixelSize } from "../../const";
+import { colorMap, gridHeight } from "../../const";
 
-export interface SnowflakeProps {
+interface SnowflakeProps {
   id: number;
   initialPosition: SkPoint;
+  pixelSize: number;
 }
 
-export const Snowflake = ({ id, initialPosition }: SnowflakeProps) => {
+export const Snowflake = ({
+  id,
+  initialPosition,
+  pixelSize,
+}: SnowflakeProps) => {
   const speed = useSharedValue(1 + Math.random() * 1.5);
   const wind = useSharedValue((Math.random() - 0.5) * 2);
   const isSettled = useSharedValue(false);
@@ -21,6 +26,7 @@ export const Snowflake = ({ id, initialPosition }: SnowflakeProps) => {
   const positionY = useSharedValue(initialPosition.y);
 
   const animatedY = useDerivedValue(() => {
+    "worklet";
     if (!isVisible.value || isSettled.value) return positionY.value;
 
     const nextY = positionY.value + speed.value;
