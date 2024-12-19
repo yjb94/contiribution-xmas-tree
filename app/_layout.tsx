@@ -7,6 +7,9 @@ const RootLayout = () => {
       <Stack
         screenOptions={{
           headerShown: false,
+          contentStyle: {
+            backgroundColor: "#fafafa",
+          },
         }}
       >
         <Stack.Screen name="index" />

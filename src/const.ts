@@ -1,7 +1,7 @@
 import { Dimensions, Platform } from "react-native";
 
 export const gridWidth = 40;
-export const gridHeight = 60;
+export const gridHeight = 55;
 
 export const screenWidth = Platform.select({
   web: Math.min(540, Dimensions.get("window").width),

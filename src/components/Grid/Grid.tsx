@@ -118,17 +118,6 @@ const styles = StyleSheet.create({
     margin: 0.5,
     borderRadius: 2,
   },
-  button: {
-    backgroundColor: "#2196F3",
-    padding: 12,
-    borderRadius: 6,
-    marginTop: 10,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    textAlign: "center",
-  },
 });
 
 export default Grid;
