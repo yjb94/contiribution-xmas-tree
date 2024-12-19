@@ -1,33 +1,22 @@
 import { Rect, type SkPoint } from "@shopify/react-native-skia";
-import {
-  useDerivedValue,
-  useSharedValue,
-  withSpring,
-} from "react-native-reanimated";
-import { colorMap, gridHeight } from "../../const";
+import { useDerivedValue, useSharedValue } from "react-native-reanimated";
+import { colorMap, gridHeight, pixelSize } from "../../const";
 
-interface SnowflakeProps {
+export interface SnowflakeProps {
   id: number;
   initialPosition: SkPoint;
-  pixelSize: number;
 }
 
-export const Snowflake = ({
-  id,
-  initialPosition,
-  pixelSize,
-}: SnowflakeProps) => {
+export const Snowflake = ({ id, initialPosition }: SnowflakeProps) => {
   const speed = useSharedValue(1 + Math.random() * 1.5);
   const wind = useSharedValue((Math.random() - 0.5) * 2);
   const isSettled = useSharedValue(false);
-  const isVisible = useSharedValue(true);
 
   const positionX = useSharedValue(initialPosition.x);
   const positionY = useSharedValue(initialPosition.y);
 
   const animatedY = useDerivedValue(() => {
-    "worklet";
-    if (!isVisible.value || isSettled.value) return positionY.value;
+    if (isSettled.value) return positionY.value;
 
     const nextY = positionY.value + speed.value;
 
@@ -35,7 +24,7 @@ export const Snowflake = ({
 
     if (nextY >= floorPosition) {
       isSettled.value = true;
-      positionY.value = withSpring(floorPosition);
+      positionY.value = floorPosition;
       return positionY.value;
     }
 
@@ -44,14 +33,12 @@ export const Snowflake = ({
   });
 
   const animatedX = useDerivedValue(() => {
-    if (!isVisible.value || isSettled.value) return positionX.value;
+    if (isSettled.value) return positionX.value;
 
     positionX.value += Math.sin(Date.now() / 1000 + id) * wind.value;
 
     return positionX.value;
   });
-
-  if (!isVisible.value) return null;
 
   return (
     <Rect

@@ -16,13 +16,13 @@ const TreePage = () => {
       setShowStatistics(true);
     }, 3000);
   }, []);
-  console.log(`JB ~ TreePage ~ contributionTreeData:`, contributionTreeData);
 
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
+      {/* @ts-ignore */}
       <Grid contributionTreeData={contributionTreeData} />
       {showStatistics && <StatsView />}
     </ScrollView>
