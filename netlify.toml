@@ -1,6 +1,6 @@
 [build]
-  command = "npx expo export --platform web"
-  publish = "dist"
+  command = "npm run build:web"
+  publish = "web-build"
 
 [[redirects]]
   from = "/tree"
@@ -14,3 +14,6 @@
   to = "/index.html"
   status = 200
   force = true
+
+[build.environment]
+  NODE_VERSION = "18"
