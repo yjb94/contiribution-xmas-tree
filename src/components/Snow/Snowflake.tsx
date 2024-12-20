@@ -1,13 +1,18 @@
 import { Rect, type SkPoint } from "@shopify/react-native-skia";
 import { useDerivedValue, useSharedValue } from "react-native-reanimated";
-import { colorMap, gridHeight, pixelSize } from "../../const";
+import { colorMap, gridHeight, pixelSize, screenPixel } from "../../const";
 
 export interface SnowflakeProps {
   id: number;
   initialPosition: SkPoint;
+  infinite?: boolean;
 }
 
-export const Snowflake = ({ id, initialPosition }: SnowflakeProps) => {
+export const Snowflake = ({
+  id,
+  initialPosition,
+  infinite,
+}: SnowflakeProps) => {
   const speed = useSharedValue(1 + Math.random() * 1.5);
   const wind = useSharedValue((Math.random() - 0.5) * 2);
   const isSettled = useSharedValue(false);
@@ -20,12 +25,19 @@ export const Snowflake = ({ id, initialPosition }: SnowflakeProps) => {
 
     const nextY = positionY.value + speed.value;
 
-    const floorPosition = (gridHeight - 1) * (pixelSize + 1);
+    if (!infinite) {
+      const floorPosition = (gridHeight - 1) * (pixelSize + 1);
 
-    if (nextY >= floorPosition) {
-      isSettled.value = true;
-      positionY.value = floorPosition;
-      return positionY.value;
+      if (nextY >= floorPosition) {
+        isSettled.value = true;
+        positionY.value = floorPosition;
+        return positionY.value;
+      }
+    } else {
+      if (nextY >= screenPixel * pixelSize) {
+        positionY.value = -pixelSize;
+        return positionY.value;
+      }
     }
 
     positionY.value = nextY;

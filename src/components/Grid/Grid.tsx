@@ -1,5 +1,5 @@
 import { vec } from "@shopify/react-native-skia";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { colorMap, gridHeight, gridWidth, pixelSize } from "../../const";
 import { SnowCanvas } from "../Snow/SnowCanvas";
@@ -19,6 +19,8 @@ const Grid: React.FC<GridProps> = ({ contributionTreeData }) => {
     createEmptyGrid()
   );
   const [snowflakes, setSnowflakes] = useState<SnowflakeProps[]>();
+
+  console.log("Grid render");
 
   useEffect(() => {
     if (!contributionTreeData || contributionTreeData.contributionCount === 0)
@@ -120,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Grid;
+export default memo(Grid);

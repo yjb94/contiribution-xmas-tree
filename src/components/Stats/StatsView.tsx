@@ -52,14 +52,12 @@ const styles = StyleSheet.create({
   },
   statisticsContainer: {
     marginTop: 8,
-    backgroundColor: "#fafafa",
     padding: 16,
-    borderRadius: 12,
     gap: 12,
   },
   statisticsText: {
     fontSize: 16,
-    color: "#404040",
+    color: "#2c2c2c",
     lineHeight: 24,
   },
 });

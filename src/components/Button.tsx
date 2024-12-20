@@ -23,7 +23,7 @@ const Button: React.FC<
       {!isLoading ? (
         <Text style={styles.buttonText}>{title}</Text>
       ) : (
-        <ActivityIndicator />
+        <ActivityIndicator color={"white"} />
       )}
     </TouchableOpacity>
   );

@@ -3,9 +3,16 @@ import {
   decorationColors,
   gridHeight,
   gridWidth,
+  pixelText,
   starColor,
   treeBreakpoints,
 } from "../../const";
+
+export const isPixelFilled = (x: number, y: number) => {
+  return [...pixelText.github, ...pixelText.christmas, ...pixelText.tree].some(
+    ([px, py]) => px === x && py === y
+  );
+};
 
 export const createEmptyGrid = () => {
   return Array.from({ length: gridHeight }, () => Array(gridWidth).fill(-1));

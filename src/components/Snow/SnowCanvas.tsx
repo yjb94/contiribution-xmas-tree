@@ -6,14 +6,16 @@ interface SnowCanvasProps {
   snowflakes: SnowflakeProps[];
 }
 
-export const SnowCanvas = ({ snowflakes }: SnowCanvasProps) => {
+const SnowCanvas = ({ snowflakes }: SnowCanvasProps) => {
   return (
     <Canvas style={StyleSheet.absoluteFill}>
       <Group>
-        {snowflakes.map(({ id, initialPosition }) => (
-          <Snowflake key={id} id={id} initialPosition={initialPosition} />
+        {snowflakes.map((snowflake) => (
+          <Snowflake key={snowflake.id} {...snowflake} />
         ))}
       </Group>
     </Canvas>
   );
 };
+
+export { SnowCanvas };

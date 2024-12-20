@@ -31,47 +31,10 @@ const TreePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#ddd",
   },
   contentContainer: {
     paddingBottom: 40,
-  },
-  inputContainer: {
-    marginBottom: 24,
-    backgroundColor: "#fafafa",
-    padding: 16,
-    borderRadius: 12,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: "#404040",
-    marginBottom: 8,
-  },
-  input: {
-    height: 44,
-    borderWidth: 1,
-    borderColor: "#e5e7eb",
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    marginBottom: 16,
-    backgroundColor: "#ffffff",
-    fontSize: 16,
-    color: "#1f2937",
-  },
-  button: {
-    marginTop: 16,
-  },
-  statisticsContainer: {
-    marginTop: 8,
-    backgroundColor: "#fafafa",
-    padding: 16,
-    borderRadius: 12,
-    gap: 12,
-  },
-  statisticsText: {
-    fontSize: 16,
-    color: "#404040",
-    lineHeight: 24,
   },
 });
 
