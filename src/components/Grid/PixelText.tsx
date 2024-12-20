@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { colorMap, gridArray, pixelSize } from "../../const";
 import { isPixelFilled } from "./lib";
@@ -36,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PixelText;
+export default React.memo(PixelText);

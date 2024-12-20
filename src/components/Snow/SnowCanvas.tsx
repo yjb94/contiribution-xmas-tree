@@ -1,4 +1,5 @@
 import { Canvas, Group } from "@shopify/react-native-skia";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Snowflake, SnowflakeProps } from "./Snowflake";
 
@@ -18,4 +19,4 @@ const SnowCanvas = ({ snowflakes }: SnowCanvasProps) => {
   );
 };
 
-export { SnowCanvas };
+export default React.memo(SnowCanvas);

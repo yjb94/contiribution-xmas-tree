@@ -7,7 +7,7 @@ import { fetchGithubContributions } from "./api/fetchGithubContribution";
 import Button from "./components/Button";
 import { generateContributionTree } from "./components/Grid/lib";
 import PixelText from "./components/Grid/PixelText";
-import { SnowCanvas } from "./components/Snow/SnowCanvas";
+import SnowCanvas from "./components/Snow/SnowCanvas";
 import { gridHeight, gridWidth, pixelSize, screenWidth } from "./const";
 import { contributionState, setContributions } from "./store/contribution";
 

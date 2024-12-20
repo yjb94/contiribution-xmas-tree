@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { useSnapshot } from "valtio";
 import { colorMap, gridHeight, gridWidth, pixelSize } from "../../const";
 import { contributionState } from "../../store/contribution";
-import { SnowCanvas } from "../Snow/SnowCanvas";
+import SnowCanvas from "../Snow/SnowCanvas";
 import { SnowflakeProps } from "../Snow/Snowflake";
 import { createEmptyGrid, generateDecorations } from "./lib";
 

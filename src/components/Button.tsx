@@ -9,21 +9,46 @@ import {
 
 const Button: React.FC<
   TouchableOpacityProps & {
+    variant?: "primary" | "secondary";
     isLoading?: boolean;
     title: string;
   }
-> = ({ isLoading, onPress, title, style, ...otherProps }) => {
+> = ({
+  variant = "primary",
+  isLoading,
+  onPress,
+  title,
+  style,
+  ...otherProps
+}) => {
+  const textColor = variant === "primary" ? "#ffffff" : "#272727";
+
   return (
     <TouchableOpacity
-      style={[style, styles.button]}
+      style={[
+        style,
+        styles.button,
+        {
+          backgroundColor: variant === "primary" ? "#272727" : "#f0f0f0",
+        },
+      ]}
       onPress={onPress}
       disabled={isLoading}
       {...otherProps}
     >
       {!isLoading ? (
-        <Text style={styles.buttonText}>{title}</Text>
+        <Text
+          style={[
+            styles.buttonText,
+            {
+              color: textColor,
+            },
+          ]}
+        >
+          {title}
+        </Text>
       ) : (
-        <ActivityIndicator color={"white"} />
+        <ActivityIndicator color={textColor} />
       )}
     </TouchableOpacity>
   );
@@ -31,7 +56,6 @@ const Button: React.FC<
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#272727",
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: "center",
