@@ -1,6 +1,6 @@
 [build]
-  command = "npm run build:web"
-  publish = "web-build"
+  command = "npx expo export --platform web"
+  publish = "dist"
 
 [[redirects]]
   from = "/tree"
