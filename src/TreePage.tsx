@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { useSnapshot } from "valtio";
 import Grid from "./components/Grid/Grid";
 import StatsView from "./components/Stats/StatsView";
+import { screenWidth } from "./const";
 import { contributionState } from "./store/contribution";
 
 const TreePage = () => {
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#dfdfdf",
+    width: screenWidth,
   },
   contentContainer: {
     paddingBottom: 40,

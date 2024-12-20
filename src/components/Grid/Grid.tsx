@@ -20,8 +20,6 @@ const Grid: React.FC<GridProps> = ({ contributionTreeData }) => {
   );
   const [snowflakes, setSnowflakes] = useState<SnowflakeProps[]>();
 
-  console.log("Grid render");
-
   useEffect(() => {
     if (!contributionTreeData || contributionTreeData.contributionCount === 0)
       return;

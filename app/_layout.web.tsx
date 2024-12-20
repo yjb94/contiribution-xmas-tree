@@ -11,7 +11,6 @@ const RootLayout = () => {
           contentStyle: {
             backgroundColor: "#fafafa",
             flex: 1,
-            alignSelf: "center",
             width: MAX_WIDTH,
           },
         }}

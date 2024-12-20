@@ -8,7 +8,7 @@ import Button from "./components/Button";
 import { generateContributionTree } from "./components/Grid/lib";
 import PixelText from "./components/Grid/PixelText";
 import { SnowCanvas } from "./components/Snow/SnowCanvas";
-import { gridHeight, gridWidth, pixelSize } from "./const";
+import { gridHeight, gridWidth, pixelSize, screenWidth } from "./const";
 import { contributionState } from "./store/contribution";
 
 const snowflakes = Array.from({ length: 365 }, (_, i) => ({
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f8f8f8",
     overflow: "hidden",
+    width: screenWidth,
     justifyContent: "center",
   },
   introMessage: {
