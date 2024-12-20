@@ -31,7 +31,7 @@ const TreePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ddd",
+    backgroundColor: "#dfdfdf",
   },
   contentContainer: {
     paddingBottom: 40,
