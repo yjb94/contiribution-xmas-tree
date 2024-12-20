@@ -1,4 +1,5 @@
 import { proxy } from "valtio";
+import { Contribution } from "../api/fetchGithubContribution";
 import {
   createEmptyGrid,
   generateContributionTree,
@@ -6,7 +7,7 @@ import {
 
 type ContributionState = {
   contributions?: number;
-  contributionTreeData: ReturnType<typeof generateContributionTree>;
+  contributionTreeData?: ReturnType<typeof generateContributionTree>;
 };
 
 export const contributionState = proxy<ContributionState>({
@@ -19,3 +20,10 @@ export const contributionState = proxy<ContributionState>({
     contributionCount: 0,
   },
 });
+
+export const setContributions = (contributions: Contribution[]) => {
+  contributionState.contributions = contributions.reduce(
+    (acc, cur) => acc + cur.count,
+    0
+  );
+};

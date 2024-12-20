@@ -1,17 +1,35 @@
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { useSnapshot } from "valtio";
+import { fetchGithubContributions } from "./api/fetchGithubContribution";
 import Grid from "./components/Grid/Grid";
+import { generateContributionTree } from "./components/Grid/lib";
 import StatsView from "./components/Stats/StatsView";
 import { screenWidth } from "./const";
-import { contributionState } from "./store/contribution";
+import { contributionState, setContributions } from "./store/contribution";
 
 const TreePage = () => {
-  const { contributionTreeData } = useSnapshot(contributionState);
+  const local = useLocalSearchParams();
 
   const [showStatistics, setShowStatistics] = useState(false);
 
+  const loadTree = async () => {
+    if (!local.userName) {
+      return;
+    }
+    const contributions = await fetchGithubContributions(
+      local.userName as string
+    );
+    setContributions(contributions);
+    contributionState.contributionTreeData =
+      generateContributionTree(contributions);
+  };
+
   useEffect(() => {
+    if (contributionState.contributions === undefined) {
+      loadTree();
+    }
+
     setTimeout(() => {
       setShowStatistics(true);
     }, 3000);
@@ -23,7 +41,7 @@ const TreePage = () => {
       contentContainerStyle={styles.contentContainer}
     >
       {/* @ts-ignore */}
-      <Grid contributionTreeData={contributionTreeData} />
+      <Grid />
       {showStatistics && <StatsView />}
     </ScrollView>
   );

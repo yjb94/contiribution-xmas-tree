@@ -9,7 +9,7 @@ import { generateContributionTree } from "./components/Grid/lib";
 import PixelText from "./components/Grid/PixelText";
 import { SnowCanvas } from "./components/Snow/SnowCanvas";
 import { gridHeight, gridWidth, pixelSize, screenWidth } from "./const";
-import { contributionState } from "./store/contribution";
+import { contributionState, setContributions } from "./store/contribution";
 
 const snowflakes = Array.from({ length: 365 }, (_, i) => ({
   id: i,
@@ -31,13 +31,13 @@ const MainPage = () => {
 
     try {
       const contributions = await fetchGithubContributions(userName);
-      contributionState.contributions = contributions.reduce(
-        (acc, cur) => acc + cur.count,
-        0
-      );
+      setContributions(contributions);
       contributionState.contributionTreeData =
         generateContributionTree(contributions);
-      router.push("tree");
+      router.push({
+        pathname: "tree",
+        params: { userName },
+      });
       setUserName("");
     } catch (error) {
       console.error(error);

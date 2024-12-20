@@ -1,34 +1,37 @@
 import { vec } from "@shopify/react-native-skia";
 import React, { memo, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useSnapshot } from "valtio";
 import { colorMap, gridHeight, gridWidth, pixelSize } from "../../const";
+import { contributionState } from "../../store/contribution";
 import { SnowCanvas } from "../Snow/SnowCanvas";
 import { SnowflakeProps } from "../Snow/Snowflake";
-import {
-  createEmptyGrid,
-  generateContributionTree,
-  generateDecorations,
-} from "./lib";
+import { createEmptyGrid, generateDecorations } from "./lib";
 
-type GridProps = {
-  contributionTreeData: ReturnType<typeof generateContributionTree>;
-};
+type GridProps = {};
 
-const Grid: React.FC<GridProps> = ({ contributionTreeData }) => {
+const Grid: React.FC<GridProps> = ({}) => {
+  const { contributions, contributionTreeData } =
+    useSnapshot(contributionState);
+
   const [decorationGrid, setDecorationGrid] = useState<(string | null)[][]>(
     createEmptyGrid()
   );
   const [snowflakes, setSnowflakes] = useState<SnowflakeProps[]>();
 
   useEffect(() => {
-    if (!contributionTreeData || contributionTreeData.contributionCount === 0)
-      return;
-
-    start();
+    if (contributions !== undefined) {
+      start();
+    }
   }, [contributionTreeData]);
 
   const start = () => {
+    if (!contributionTreeData) {
+      return;
+    }
+
     const decorationGrid = generateDecorations(
+      // @ts-ignore
       contributionTreeData.grid,
       Math.max(
         contributionTreeData.remainingContributions,
