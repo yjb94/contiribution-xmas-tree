@@ -1,0 +1,16 @@
+[build]
+  command = "expo export:web"
+  publish = "dist"
+
+[[redirects]]
+  from = "/tree"
+  to = "/index.html"
+  status = 200
+  force = true
+  query = {userName = ":userName"}
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
