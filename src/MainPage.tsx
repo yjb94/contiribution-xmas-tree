@@ -46,7 +46,7 @@ const MainPage = () => {
         <Button
           isLoading={isLoading}
           onPress={fetchContributions}
-          title="Fetch"
+          title="Make my tree"
         />
       </View>
     </View>
