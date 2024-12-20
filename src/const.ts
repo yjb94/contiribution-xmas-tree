@@ -3,8 +3,9 @@ import { Dimensions, Platform } from "react-native";
 export const gridWidth = 40;
 export const gridHeight = 55;
 
+export const MAX_WIDTH = 540 as const;
 export const screenWidth = Platform.select({
-  web: Math.min(540, Dimensions.get("window").width),
+  web: Math.min(MAX_WIDTH, Dimensions.get("window").width),
   native: Dimensions.get("window").width,
 });
 export const pixelSize = Math.floor(screenWidth / gridWidth);
